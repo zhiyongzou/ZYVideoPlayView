@@ -1,0 +1,713 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8121EB791F8E129C00CAA16A /* ZYLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8121EB781F8E129C00CAA16A /* ZYLoadingView.m */; };
+		819C52561F4A9105005F1CCA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 819C52541F4A9105005F1CCA /* AppDelegate.m */; };
+		819C52571F4A9105005F1CCA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 819C52551F4A9105005F1CCA /* main.m */; };
+		819C525E1F4A9110005F1CCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 819C52591F4A9110005F1CCA /* Assets.xcassets */; };
+		819C525F1F4A9110005F1CCA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 819C525A1F4A9110005F1CCA /* LaunchScreen.storyboard */; };
+		819C52601F4A9110005F1CCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 819C525C1F4A9110005F1CCA /* Main.storyboard */; };
+		819C52661F4A918F005F1CCA /* VideoList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 819C52651F4A918F005F1CCA /* VideoList.plist */; };
+		819C526C1F4A9410005F1CCA /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 819C526B1F4A9410005F1CCA /* VideoViewController.m */; };
+		819C52721F4ACFE1005F1CCA /* VideoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 819C52711F4ACFE1005F1CCA /* VideoViewCell.m */; };
+		819C52751F4AD007005F1CCA /* VideoPlayControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 819C52741F4AD007005F1CCA /* VideoPlayControlView.m */; };
+		81D2C03E1F4B0A8C0060C3FB /* VideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D2C03D1F4B0A8C0060C3FB /* VideoModel.m */; };
+		DF4770D9B43E7B81B1872B13 /* libPods-ZYVideoPlayViewDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C0EFDAE329DE3464137F759 /* libPods-ZYVideoPlayViewDemo.a */; };
+		DFE63F301F0DE96600252D1D /* ZYVideoPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = DFE63F2F1F0DE96600252D1D /* ZYVideoPlayView.m */; };
+		DFEE392D1EE174CC00B9FCDC /* ZYVideoPlayViewDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DFEE392C1EE174CC00B9FCDC /* ZYVideoPlayViewDemoTests.m */; };
+		DFEE39381EE174CC00B9FCDC /* ZYVideoPlayViewDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DFEE39371EE174CC00B9FCDC /* ZYVideoPlayViewDemoUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DFEE39291EE174CC00B9FCDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DFEE39071EE174CC00B9FCDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DFEE390E1EE174CC00B9FCDC;
+			remoteInfo = ZYVideoPlayViewDemo;
+		};
+		DFEE39341EE174CC00B9FCDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DFEE39071EE174CC00B9FCDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DFEE390E1EE174CC00B9FCDC;
+			remoteInfo = ZYVideoPlayViewDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2375A02F2C2F7A5832B69CC1 /* Pods-ZYVideoPlayViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZYVideoPlayViewDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZYVideoPlayViewDemo/Pods-ZYVideoPlayViewDemo.release.xcconfig"; sourceTree = "<group>"; };
+		27EB7B32C62040B268616EE5 /* Pods-ZYVideoPlayViewDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZYVideoPlayViewDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZYVideoPlayViewDemo/Pods-ZYVideoPlayViewDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		5C0EFDAE329DE3464137F759 /* libPods-ZYVideoPlayViewDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZYVideoPlayViewDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8121EB771F8E129C00CAA16A /* ZYLoadingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZYLoadingView.h; sourceTree = "<group>"; };
+		8121EB781F8E129C00CAA16A /* ZYLoadingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZYLoadingView.m; sourceTree = "<group>"; };
+		819C52531F4A9105005F1CCA /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		819C52541F4A9105005F1CCA /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		819C52551F4A9105005F1CCA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		819C52591F4A9110005F1CCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		819C525B1F4A9110005F1CCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		819C525D1F4A9110005F1CCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		819C52651F4A918F005F1CCA /* VideoList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = VideoList.plist; sourceTree = "<group>"; };
+		819C526A1F4A9410005F1CCA /* VideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoViewController.h; sourceTree = "<group>"; };
+		819C526B1F4A9410005F1CCA /* VideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoViewController.m; sourceTree = "<group>"; };
+		819C52701F4ACFE1005F1CCA /* VideoViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoViewCell.h; sourceTree = "<group>"; };
+		819C52711F4ACFE1005F1CCA /* VideoViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoViewCell.m; sourceTree = "<group>"; };
+		819C52731F4AD007005F1CCA /* VideoPlayControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayControlView.h; sourceTree = "<group>"; };
+		819C52741F4AD007005F1CCA /* VideoPlayControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayControlView.m; sourceTree = "<group>"; };
+		81D2C03C1F4B0A8C0060C3FB /* VideoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoModel.h; sourceTree = "<group>"; };
+		81D2C03D1F4B0A8C0060C3FB /* VideoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoModel.m; sourceTree = "<group>"; };
+		DFE63F2E1F0DE96600252D1D /* ZYVideoPlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYVideoPlayView.h; sourceTree = "<group>"; };
+		DFE63F2F1F0DE96600252D1D /* ZYVideoPlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYVideoPlayView.m; sourceTree = "<group>"; };
+		DFEE390F1EE174CC00B9FCDC /* ZYVideoPlayViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZYVideoPlayViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DFEE39231EE174CC00B9FCDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DFEE39281EE174CC00B9FCDC /* ZYVideoPlayViewDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZYVideoPlayViewDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DFEE392C1EE174CC00B9FCDC /* ZYVideoPlayViewDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZYVideoPlayViewDemoTests.m; sourceTree = "<group>"; };
+		DFEE392E1EE174CC00B9FCDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DFEE39331EE174CC00B9FCDC /* ZYVideoPlayViewDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZYVideoPlayViewDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DFEE39371EE174CC00B9FCDC /* ZYVideoPlayViewDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZYVideoPlayViewDemoUITests.m; sourceTree = "<group>"; };
+		DFEE39391EE174CC00B9FCDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DFEE390C1EE174CC00B9FCDC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF4770D9B43E7B81B1872B13 /* libPods-ZYVideoPlayViewDemo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DFEE39251EE174CC00B9FCDC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DFEE39301EE174CC00B9FCDC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		02179B13A140B19E242A6DA0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5C0EFDAE329DE3464137F759 /* libPods-ZYVideoPlayViewDemo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		670CBE952B26021960B708A2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				27EB7B32C62040B268616EE5 /* Pods-ZYVideoPlayViewDemo.debug.xcconfig */,
+				2375A02F2C2F7A5832B69CC1 /* Pods-ZYVideoPlayViewDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		8121EB761F8E127A00CAA16A /* ZYLoadingView */ = {
+			isa = PBXGroup;
+			children = (
+				8121EB771F8E129C00CAA16A /* ZYLoadingView.h */,
+				8121EB781F8E129C00CAA16A /* ZYLoadingView.m */,
+			);
+			path = ZYLoadingView;
+			sourceTree = "<group>";
+		};
+		819C52521F4A9105005F1CCA /* App */ = {
+			isa = PBXGroup;
+			children = (
+				819C52531F4A9105005F1CCA /* AppDelegate.h */,
+				819C52541F4A9105005F1CCA /* AppDelegate.m */,
+				819C52551F4A9105005F1CCA /* main.m */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		819C52581F4A9110005F1CCA /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				819C52651F4A918F005F1CCA /* VideoList.plist */,
+				819C52591F4A9110005F1CCA /* Assets.xcassets */,
+				819C525C1F4A9110005F1CCA /* Main.storyboard */,
+				819C525A1F4A9110005F1CCA /* LaunchScreen.storyboard */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		819C52611F4A911B005F1CCA /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				819C526A1F4A9410005F1CCA /* VideoViewController.h */,
+				819C526B1F4A9410005F1CCA /* VideoViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		819C526E1F4ACFE1005F1CCA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8121EB761F8E127A00CAA16A /* ZYLoadingView */,
+				819C526F1F4ACFE1005F1CCA /* VideoPlayControlView */,
+				819C52701F4ACFE1005F1CCA /* VideoViewCell.h */,
+				819C52711F4ACFE1005F1CCA /* VideoViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		819C526F1F4ACFE1005F1CCA /* VideoPlayControlView */ = {
+			isa = PBXGroup;
+			children = (
+				819C52731F4AD007005F1CCA /* VideoPlayControlView.h */,
+				819C52741F4AD007005F1CCA /* VideoPlayControlView.m */,
+			);
+			path = VideoPlayControlView;
+			sourceTree = "<group>";
+		};
+		81D2C03B1F4B0A720060C3FB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				81D2C03C1F4B0A8C0060C3FB /* VideoModel.h */,
+				81D2C03D1F4B0A8C0060C3FB /* VideoModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DFE63F2D1F0DE96600252D1D /* ZYVideoPlayView */ = {
+			isa = PBXGroup;
+			children = (
+				DFE63F2E1F0DE96600252D1D /* ZYVideoPlayView.h */,
+				DFE63F2F1F0DE96600252D1D /* ZYVideoPlayView.m */,
+			);
+			path = ZYVideoPlayView;
+			sourceTree = "<group>";
+		};
+		DFEE39061EE174CC00B9FCDC = {
+			isa = PBXGroup;
+			children = (
+				DFEE39111EE174CC00B9FCDC /* ZYVideoPlayViewDemo */,
+				DFEE392B1EE174CC00B9FCDC /* ZYVideoPlayViewDemoTests */,
+				DFEE39361EE174CC00B9FCDC /* ZYVideoPlayViewDemoUITests */,
+				DFEE39101EE174CC00B9FCDC /* Products */,
+				670CBE952B26021960B708A2 /* Pods */,
+				02179B13A140B19E242A6DA0 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		DFEE39101EE174CC00B9FCDC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DFEE390F1EE174CC00B9FCDC /* ZYVideoPlayViewDemo.app */,
+				DFEE39281EE174CC00B9FCDC /* ZYVideoPlayViewDemoTests.xctest */,
+				DFEE39331EE174CC00B9FCDC /* ZYVideoPlayViewDemoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DFEE39111EE174CC00B9FCDC /* ZYVideoPlayViewDemo */ = {
+			isa = PBXGroup;
+			children = (
+				DFE63F2D1F0DE96600252D1D /* ZYVideoPlayView */,
+				819C52521F4A9105005F1CCA /* App */,
+				81D2C03B1F4B0A720060C3FB /* Model */,
+				819C526E1F4ACFE1005F1CCA /* View */,
+				819C52611F4A911B005F1CCA /* ViewController */,
+				819C52581F4A9110005F1CCA /* Resource */,
+				DFEE39121EE174CC00B9FCDC /* Supporting Files */,
+			);
+			path = ZYVideoPlayViewDemo;
+			sourceTree = "<group>";
+		};
+		DFEE39121EE174CC00B9FCDC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DFEE39231EE174CC00B9FCDC /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DFEE392B1EE174CC00B9FCDC /* ZYVideoPlayViewDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				DFEE392C1EE174CC00B9FCDC /* ZYVideoPlayViewDemoTests.m */,
+				DFEE392E1EE174CC00B9FCDC /* Info.plist */,
+			);
+			path = ZYVideoPlayViewDemoTests;
+			sourceTree = "<group>";
+		};
+		DFEE39361EE174CC00B9FCDC /* ZYVideoPlayViewDemoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DFEE39371EE174CC00B9FCDC /* ZYVideoPlayViewDemoUITests.m */,
+				DFEE39391EE174CC00B9FCDC /* Info.plist */,
+			);
+			path = ZYVideoPlayViewDemoUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DFEE390E1EE174CC00B9FCDC /* ZYVideoPlayViewDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DFEE393C1EE174CD00B9FCDC /* Build configuration list for PBXNativeTarget "ZYVideoPlayViewDemo" */;
+			buildPhases = (
+				F8263E9D6EB657A544602468 /* [CP] Check Pods Manifest.lock */,
+				DFEE390B1EE174CC00B9FCDC /* Sources */,
+				DFEE390C1EE174CC00B9FCDC /* Frameworks */,
+				DFEE390D1EE174CC00B9FCDC /* Resources */,
+				28858AF345D6CF5E776CC428 /* [CP] Embed Pods Frameworks */,
+				E380F748127972DCAEB780B5 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZYVideoPlayViewDemo;
+			productName = ZYVideoPlayViewDemo;
+			productReference = DFEE390F1EE174CC00B9FCDC /* ZYVideoPlayViewDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DFEE39271EE174CC00B9FCDC /* ZYVideoPlayViewDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DFEE393F1EE174CD00B9FCDC /* Build configuration list for PBXNativeTarget "ZYVideoPlayViewDemoTests" */;
+			buildPhases = (
+				DFEE39241EE174CC00B9FCDC /* Sources */,
+				DFEE39251EE174CC00B9FCDC /* Frameworks */,
+				DFEE39261EE174CC00B9FCDC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DFEE392A1EE174CC00B9FCDC /* PBXTargetDependency */,
+			);
+			name = ZYVideoPlayViewDemoTests;
+			productName = ZYVideoPlayViewDemoTests;
+			productReference = DFEE39281EE174CC00B9FCDC /* ZYVideoPlayViewDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DFEE39321EE174CC00B9FCDC /* ZYVideoPlayViewDemoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DFEE39421EE174CD00B9FCDC /* Build configuration list for PBXNativeTarget "ZYVideoPlayViewDemoUITests" */;
+			buildPhases = (
+				DFEE392F1EE174CC00B9FCDC /* Sources */,
+				DFEE39301EE174CC00B9FCDC /* Frameworks */,
+				DFEE39311EE174CC00B9FCDC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DFEE39351EE174CC00B9FCDC /* PBXTargetDependency */,
+			);
+			name = ZYVideoPlayViewDemoUITests;
+			productName = ZYVideoPlayViewDemoUITests;
+			productReference = DFEE39331EE174CC00B9FCDC /* ZYVideoPlayViewDemoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DFEE39071EE174CC00B9FCDC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = zzyong;
+				TargetAttributes = {
+					DFEE390E1EE174CC00B9FCDC = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = XFLD6ZMY2Q;
+						ProvisioningStyle = Automatic;
+					};
+					DFEE39271EE174CC00B9FCDC = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = DFEE390E1EE174CC00B9FCDC;
+					};
+					DFEE39321EE174CC00B9FCDC = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = DFEE390E1EE174CC00B9FCDC;
+					};
+				};
+			};
+			buildConfigurationList = DFEE390A1EE174CC00B9FCDC /* Build configuration list for PBXProject "ZYVideoPlayViewDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DFEE39061EE174CC00B9FCDC;
+			productRefGroup = DFEE39101EE174CC00B9FCDC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DFEE390E1EE174CC00B9FCDC /* ZYVideoPlayViewDemo */,
+				DFEE39271EE174CC00B9FCDC /* ZYVideoPlayViewDemoTests */,
+				DFEE39321EE174CC00B9FCDC /* ZYVideoPlayViewDemoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DFEE390D1EE174CC00B9FCDC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				819C52661F4A918F005F1CCA /* VideoList.plist in Resources */,
+				819C525E1F4A9110005F1CCA /* Assets.xcassets in Resources */,
+				819C52601F4A9110005F1CCA /* Main.storyboard in Resources */,
+				819C525F1F4A9110005F1CCA /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DFEE39261EE174CC00B9FCDC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DFEE39311EE174CC00B9FCDC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		28858AF345D6CF5E776CC428 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZYVideoPlayViewDemo/Pods-ZYVideoPlayViewDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E380F748127972DCAEB780B5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZYVideoPlayViewDemo/Pods-ZYVideoPlayViewDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F8263E9D6EB657A544602468 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DFEE390B1EE174CC00B9FCDC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				819C52751F4AD007005F1CCA /* VideoPlayControlView.m in Sources */,
+				819C52721F4ACFE1005F1CCA /* VideoViewCell.m in Sources */,
+				DFE63F301F0DE96600252D1D /* ZYVideoPlayView.m in Sources */,
+				819C526C1F4A9410005F1CCA /* VideoViewController.m in Sources */,
+				819C52571F4A9105005F1CCA /* main.m in Sources */,
+				81D2C03E1F4B0A8C0060C3FB /* VideoModel.m in Sources */,
+				8121EB791F8E129C00CAA16A /* ZYLoadingView.m in Sources */,
+				819C52561F4A9105005F1CCA /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DFEE39241EE174CC00B9FCDC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFEE392D1EE174CC00B9FCDC /* ZYVideoPlayViewDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DFEE392F1EE174CC00B9FCDC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFEE39381EE174CC00B9FCDC /* ZYVideoPlayViewDemoUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DFEE392A1EE174CC00B9FCDC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DFEE390E1EE174CC00B9FCDC /* ZYVideoPlayViewDemo */;
+			targetProxy = DFEE39291EE174CC00B9FCDC /* PBXContainerItemProxy */;
+		};
+		DFEE39351EE174CC00B9FCDC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DFEE390E1EE174CC00B9FCDC /* ZYVideoPlayViewDemo */;
+			targetProxy = DFEE39341EE174CC00B9FCDC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		819C525A1F4A9110005F1CCA /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				819C525B1F4A9110005F1CCA /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		819C525C1F4A9110005F1CCA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				819C525D1F4A9110005F1CCA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DFEE393A1EE174CD00B9FCDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DFEE393B1EE174CD00B9FCDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DFEE393D1EE174CD00B9FCDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 27EB7B32C62040B268616EE5 /* Pods-ZYVideoPlayViewDemo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = XFLD6ZMY2Q;
+				INFOPLIST_FILE = ZYVideoPlayViewDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = zzyong.zzy;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DFEE393E1EE174CD00B9FCDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2375A02F2C2F7A5832B69CC1 /* Pods-ZYVideoPlayViewDemo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = XFLD6ZMY2Q;
+				INFOPLIST_FILE = ZYVideoPlayViewDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = zzyong.zzy;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		DFEE39401EE174CD00B9FCDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ZYVideoPlayViewDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = zzyong.ZYVideoPlayViewDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZYVideoPlayViewDemo.app/ZYVideoPlayViewDemo";
+			};
+			name = Debug;
+		};
+		DFEE39411EE174CD00B9FCDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ZYVideoPlayViewDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = zzyong.ZYVideoPlayViewDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZYVideoPlayViewDemo.app/ZYVideoPlayViewDemo";
+			};
+			name = Release;
+		};
+		DFEE39431EE174CD00B9FCDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ZYVideoPlayViewDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = zzyong.ZYVideoPlayViewDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ZYVideoPlayViewDemo;
+			};
+			name = Debug;
+		};
+		DFEE39441EE174CD00B9FCDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ZYVideoPlayViewDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = zzyong.ZYVideoPlayViewDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ZYVideoPlayViewDemo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DFEE390A1EE174CC00B9FCDC /* Build configuration list for PBXProject "ZYVideoPlayViewDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFEE393A1EE174CD00B9FCDC /* Debug */,
+				DFEE393B1EE174CD00B9FCDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DFEE393C1EE174CD00B9FCDC /* Build configuration list for PBXNativeTarget "ZYVideoPlayViewDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFEE393D1EE174CD00B9FCDC /* Debug */,
+				DFEE393E1EE174CD00B9FCDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DFEE393F1EE174CD00B9FCDC /* Build configuration list for PBXNativeTarget "ZYVideoPlayViewDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFEE39401EE174CD00B9FCDC /* Debug */,
+				DFEE39411EE174CD00B9FCDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DFEE39421EE174CD00B9FCDC /* Build configuration list for PBXNativeTarget "ZYVideoPlayViewDemoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFEE39431EE174CD00B9FCDC /* Debug */,
+				DFEE39441EE174CD00B9FCDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DFEE39071EE174CC00B9FCDC /* Project object */;
+}
