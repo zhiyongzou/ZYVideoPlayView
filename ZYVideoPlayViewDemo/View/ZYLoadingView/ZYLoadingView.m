@@ -12,7 +12,6 @@ static const CGFloat kLoadingViewWidth = 80.0;
 
 @interface ZYLoadingView ()
 
-@property (nonatomic ,weak) CAReplicatorLayer *replicatorLayer;
 @property (nonatomic ,weak) CALayer *dotLayer;
 
 @end
@@ -23,21 +22,20 @@ static const CGFloat kLoadingViewWidth = 80.0;
 {
     if (self = [super init]) {
         self.frame = CGRectMake(0, 0, kLoadingViewWidth, kLoadingViewWidth);
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor colorWithWhite:0 alpha:0.6];
+        self.layer.cornerRadius = 8.0;
         [self setupAnimatedLayers];
     }
     return self;
 }
 
++ (Class)layerClass
+{
+    return [CAReplicatorLayer class];
+}
+
 - (void)setupAnimatedLayers
 {
-    CAReplicatorLayer *replicatorLayer = [CAReplicatorLayer layer];
-    replicatorLayer.bounds = CGRectMake(0, 0, kLoadingViewWidth, kLoadingViewWidth);
-    replicatorLayer.cornerRadius = 8.0;
-    replicatorLayer.position = self.center;
-    replicatorLayer.backgroundColor = [UIColor colorWithWhite:0 alpha:0.6].CGColor;
-    [self.layer addSublayer:replicatorLayer];
-    
     CALayer *dotLayer = [CALayer layer];
     dotLayer.bounds = CGRectMake(0, 0, 8, 8);
     dotLayer.position = CGPointMake(15, kLoadingViewWidth * 0.5);
@@ -45,13 +43,12 @@ static const CGFloat kLoadingViewWidth = 80.0;
     dotLayer.transform = CATransform3DMakeScale(0, 0, 0);
     dotLayer.backgroundColor = [UIColor colorWithWhite:1 alpha:1].CGColor;
     
-    [replicatorLayer addSublayer:dotLayer];
-    replicatorLayer.instanceCount = 10;
-    replicatorLayer.instanceDelay = 0.1;
-    replicatorLayer.instanceTransform = CATransform3DMakeRotation(2 * M_PI / 10, 0, 0, 1);
+    [self.layer addSublayer:dotLayer];
+    [(CAReplicatorLayer *)self.layer setInstanceCount:10];
+    [(CAReplicatorLayer *)self.layer setInstanceDelay:0.1];
+    [(CAReplicatorLayer *)self.layer setInstanceTransform:CATransform3DMakeRotation(2 * M_PI / 10, 0, 0, 1)];
     
     self.dotLayer = dotLayer;
-    self.replicatorLayer = replicatorLayer;
 }
 
 - (void)zy_addAnimation
