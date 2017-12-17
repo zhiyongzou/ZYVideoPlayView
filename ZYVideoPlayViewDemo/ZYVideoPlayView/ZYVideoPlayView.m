@@ -244,6 +244,9 @@ static NSString * const ZYPlayerRateKey = @"rate";
 {
     if (self.player.status == AVPlayerItemStatusUnknown) {
         // wait until item becomes ready
+        if (completion) {
+            completion();
+        }
     } else if (self.player.status == AVPlayerItemStatusReadyToPlay) {
         [self actuallySeekToTimeCompletion:completion];
     }
@@ -253,10 +256,11 @@ static NSString * const ZYPlayerRateKey = @"rate";
 {
     self.isSeekInProgress = YES;
     CMTime seekTimeInProgress = self.chaseTime;
-    [self.player seekToTime:seekTimeInProgress toleranceBefore:kCMTimeZero
-             toleranceAfter:kCMTimeZero completionHandler:
-     ^(BOOL isFinished)
-     {
+    [self.player seekToTime:seekTimeInProgress
+            toleranceBefore:kCMTimeZero
+             toleranceAfter:kCMTimeZero
+          completionHandler: ^(BOOL isFinished) {
+              
          if (CMTIME_COMPARE_INLINE(seekTimeInProgress, ==, self.chaseTime)) {
              self.isSeekInProgress = NO;
              self.chaseTime = kCMTimeInvalid;

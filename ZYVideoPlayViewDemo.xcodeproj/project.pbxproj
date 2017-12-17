@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8121EB791F8E129C00CAA16A /* ZYLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8121EB781F8E129C00CAA16A /* ZYLoadingView.m */; };
+		81508EF31FE69CA2000465F9 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 81508EF21FE69CA2000465F9 /* UIView+Extension.m */; };
 		819C52561F4A9105005F1CCA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 819C52541F4A9105005F1CCA /* AppDelegate.m */; };
 		819C52571F4A9105005F1CCA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 819C52551F4A9105005F1CCA /* main.m */; };
 		819C525E1F4A9110005F1CCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 819C52591F4A9110005F1CCA /* Assets.xcassets */; };
@@ -47,6 +48,8 @@
 		5C0EFDAE329DE3464137F759 /* libPods-ZYVideoPlayViewDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZYVideoPlayViewDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8121EB771F8E129C00CAA16A /* ZYLoadingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZYLoadingView.h; sourceTree = "<group>"; };
 		8121EB781F8E129C00CAA16A /* ZYLoadingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZYLoadingView.m; sourceTree = "<group>"; };
+		81508EF11FE69CA2000465F9 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		81508EF21FE69CA2000465F9 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		819C52531F4A9105005F1CCA /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		819C52541F4A9105005F1CCA /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		819C52551F4A9105005F1CCA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -124,6 +127,15 @@
 				8121EB781F8E129C00CAA16A /* ZYLoadingView.m */,
 			);
 			path = ZYLoadingView;
+			sourceTree = "<group>";
+		};
+		81508EF01FE69C79000465F9 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				81508EF11FE69CA2000465F9 /* UIView+Extension.h */,
+				81508EF21FE69CA2000465F9 /* UIView+Extension.m */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		819C52521F4A9105005F1CCA /* App */ = {
@@ -219,6 +231,7 @@
 		DFEE39111EE174CC00B9FCDC /* ZYVideoPlayViewDemo */ = {
 			isa = PBXGroup;
 			children = (
+				81508EF01FE69C79000465F9 /* Base */,
 				DFE63F2D1F0DE96600252D1D /* ZYVideoPlayView */,
 				819C52521F4A9105005F1CCA /* App */,
 				81D2C03B1F4B0A720060C3FB /* Model */,
@@ -448,6 +461,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81508EF31FE69CA2000465F9 /* UIView+Extension.m in Sources */,
 				819C52751F4AD007005F1CCA /* VideoPlayControlView.m in Sources */,
 				819C52721F4ACFE1005F1CCA /* VideoViewCell.m in Sources */,
 				DFE63F301F0DE96600252D1D /* ZYVideoPlayView.m in Sources */,

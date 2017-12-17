@@ -11,10 +11,11 @@
 #import "ZYVideoPlayView.h"
 #import "VideoViewController.h"
 
-@interface VideoViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface VideoViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, VideoViewCellDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray<VideoModel *> *videoList;
+@property (nonatomic, strong) NSIndexPath *currentPlayIndexP;
 
 @end
 
@@ -85,7 +86,8 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     VideoViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"VideoViewCell" forIndexPath:indexPath];
-    cell.videoInfo = [self.videoList objectAtIndex:indexPath.row];
+    [cell setupVideoInfo:[self.videoList objectAtIndex:indexPath.row] indexPath:indexPath];
+    cell.delegate = self;
     return cell;
 }
 
@@ -94,6 +96,22 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return CGSizeMake(collectionView.frame.size.width, collectionView.frame.size.width * 9 / 16.0 + 40);
+}
+
+#pragma mark - VideoViewCellDelegate
+
+- (void)videoDidPlayVideo:(VideoModel *)videoInfo indexPath:(NSIndexPath *)indexPath
+{
+    if (self.currentPlayIndexP == indexPath) {
+        return;
+    }
+    
+    VideoViewCell *last = (VideoViewCell *)[self.collectionView cellForItemAtIndexPath:self.currentPlayIndexP];
+    [last stopPlay];
+    
+    self.currentPlayIndexP = indexPath;
+    
+    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
 }
 
 @end

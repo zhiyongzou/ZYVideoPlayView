@@ -18,6 +18,7 @@
 @property (nonatomic, assign, readonly) BOOL isSeeking;
 
 - (void)updateVideoCurrentPlayTime:(NSTimeInterval)currentTime;
+- (void)updateVideoPlayState:(BOOL)isPlay;
 
 @end
 

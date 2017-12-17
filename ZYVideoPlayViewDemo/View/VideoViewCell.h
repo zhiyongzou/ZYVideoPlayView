@@ -9,8 +9,17 @@
 #import <UIKit/UIKit.h>
 @class VideoModel;
 
+@protocol VideoViewCellDelegate <NSObject>
+
+- (void)videoDidPlayVideo:(VideoModel *)videoInfo indexPath:(NSIndexPath *)indexPath;
+
+@end
+
 @interface VideoViewCell : UICollectionViewCell
 
-@property (nonatomic, strong) VideoModel *videoInfo;
+@property (nonatomic, weak) id<VideoViewCellDelegate> delegate;
+
+- (void)stopPlay;
+- (void)setupVideoInfo:(VideoModel *)videoInfo indexPath:(NSIndexPath *)indexPath;
 
 @end

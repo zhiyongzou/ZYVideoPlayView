@@ -16,6 +16,9 @@
 
 @interface VideoViewCell () <ZYVideoPlayViewDelegate, VideoPlayControlViewDelegate>
 
+@property (nonatomic, strong) VideoModel *videoInfo;
+@property (nonatomic, strong) NSIndexPath *indexPath;
+
 @property (nonatomic, strong) ZYVideoPlayView *videoPlayView;
 @property (nonatomic, strong) UILabel *videoPlayNum;
 @property (nonatomic, strong) UILabel *videoDuration;
@@ -26,6 +29,8 @@
 @property (nonatomic, strong) UIImageView *authorIcon;
 @property (nonatomic, strong) UILabel *authorName;
 @property (nonatomic, strong) UIButton *commentButton;
+
+@property (nonatomic, assign) BOOL isSeeking;
 
 @end
 
@@ -68,7 +73,6 @@
 
 - (void)videoPlayControlViewDidPlayVideo:(BOOL)isPlay
 {
-//    self.videoPlayControlView.hidden = YES;
     if (!self.videoPlayView.videoURL) {
         [ZYLoadingView showInView:self.videoCoverView];
         [self.videoPlayView setVideoURL:[NSURL URLWithString:self.videoInfo.video_url]];
@@ -81,6 +85,33 @@
             [self.videoPlayView pause];
         }
     }
+    
+    [self.delegate videoDidPlayVideo:self.videoInfo indexPath:self.indexPath];
+}
+
+- (void)videoPlayControlViewWillBeginSeeking:(VideoPlayControlView *)aView
+{
+    self.isSeeking = YES;
+}
+
+- (void)videoPlayControlViewDidEndSeeking:(VideoPlayControlView *)aView seekTime:(NSTimeInterval)seekTime
+{
+    [ZYLoadingView showInView:aView];
+    
+    __weak typeof(self) weakSelf = self;
+    [self.videoPlayView seekToTime:seekTime completion:^{
+        [weakSelf handleSeekEnd];
+    }];
+}
+
+#pragma mark - video controller
+
+- (void)handleSeekEnd
+{
+    [ZYLoadingView dismiss];
+    self.isSeeking = NO;
+    [self.videoPlayView play];
+    [self.videoPlayControlView updateVideoPlayState:YES];
 }
 
 #pragma mark - VideoPlayViewDelegate
@@ -115,7 +146,9 @@
 
 - (void)zy_videoPlayView:(ZYVideoPlayView *)videoPlayView didUpdateCurrentTime:(NSTimeInterval)currenttime
 {
-    [self.videoPlayControlView updateVideoCurrentPlayTime:currenttime];
+    if (!self.isSeeking) {
+        [self.videoPlayControlView updateVideoCurrentPlayTime:currenttime];
+    }
 }
 
 - (void)zy_videoPlayView:(ZYVideoPlayView *)videoPlayView didUpdateCacheDuration:(NSTimeInterval)cacheDuration
@@ -205,6 +238,19 @@
         make.left.equalTo(self.authorIcon.mas_right).offset(5);
         make.right.equalTo(self.commentButton.mas_left).offset(-5);
     }];
+}
+
+#pragma mark - public
+
+- (void)setupVideoInfo:(VideoModel *)videoInfo indexPath:(NSIndexPath *)indexPath
+{
+    self.videoInfo = videoInfo;
+    self.indexPath = indexPath;
+}
+
+- (void)stopPlay
+{
+    [self.videoPlayView pause];
 }
 
 @end

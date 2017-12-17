@@ -6,6 +6,7 @@
 //  Copyright © 2017年 zzyong. All rights reserved.
 //
 
+#import "UIView+Extension.h"
 #import "VideoPlayControlView.h"
 
 @interface VideoPlayControlView ()
@@ -16,14 +17,16 @@
 @property (nonatomic, strong) UILabel *currentPlayTime;
 @property (nonatomic, strong) UISlider *seekSlider;
 @property (nonatomic, strong) UILabel *videoDuretion;
+@property (nonatomic, strong) UIProgressView *progressView;
 
 @property (nonatomic, assign) CGPoint beginLocation;
 @property (nonatomic, assign) CGFloat moveMargin;
 @property (nonatomic, assign) CGFloat beginSliderValue;
-@property (nonatomic, assign) BOOL isfirstTimeClickPlayButton;
+@property (nonatomic, assign) BOOL isfirstTimePlay;
+@property (nonatomic, assign) BOOL isPlaying;
 
-@property (nonatomic, weak) CAGradientLayer *topGradientLayer;
-@property (nonatomic, weak) CAGradientLayer *bottomGradientLayer;
+@property (nonatomic, strong) CAGradientLayer *topGradientLayer;
+@property (nonatomic, strong) CAGradientLayer *bottomGradientLayer;
 
 @end
 
@@ -61,6 +64,8 @@
         CGFloat seekSlider_w = CGRectGetWidth(self.bottomContentView.bounds) - 2 * currentPlayTime_w - 10;
         self.seekSlider.frame = CGRectMake(seekSlider_x, 0, seekSlider_w, CGRectGetHeight(self.bottomContentView.bounds));
     }
+    
+    self.progressView.frame = CGRectMake(0, self.height - 2, self.width, 2);
 }
 
 #pragma mark - setter/getter
@@ -70,9 +75,11 @@
     _duration = duration;
     
     [self setupBottomContentView];
-    self.currentPlayTime.text = (int)duration/(60*60) > 0 ? @"00:00:00" : @"00:00";
+    self.currentPlayTime.text = (int)duration / (60 * 60) > 0 ? @"00:00:00" : @"00:00";
     self.seekSlider.maximumValue = duration;
     self.videoDuretion.text = [self formattedStringWithDuration:duration];
+    self.bottomContentView.hidden = self.playButton.hidden;
+    
     [self setNeedsLayout];
 }
 
@@ -82,20 +89,23 @@
 {
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hiddenSubViews) object:nil];
     
-    playButton.selected = !playButton.selected;
-    [playButton setImage:[self playButtonImageWithPlaying:playButton.selected]
+    self.isPlaying = !self.isPlaying;
+    
+    [playButton setImage:[self playButtonImageWithPlaying:self.isPlaying]
                 forState:UIControlStateNormal];
     if ([self.delegate respondsToSelector:@selector(videoPlayControlViewDidPlayVideo:)]) {
-        [self.delegate videoPlayControlViewDidPlayVideo:playButton.selected];
+        [self.delegate videoPlayControlViewDidPlayVideo:self.isPlaying];
     }
     
-    if (!self.isfirstTimeClickPlayButton) {
+    if (self.isPlaying) {
+        [self performSelector:@selector(hiddenSubViews) withObject:nil afterDelay:3];
+    }
+
+    if (!self.isfirstTimePlay) {
         [self hiddenSubViews];
-        self.isfirstTimeClickPlayButton = YES;
+        self.isfirstTimePlay = YES;
         return;
     }
-    
-    [self performSelector:@selector(hiddenSubViews) withObject:nil afterDelay:3];
 }
 
 - (void)onseekSliderPan:(UIPanGestureRecognizer *)panGestureRecognizer
@@ -129,6 +139,7 @@
             if ([self.delegate respondsToSelector:@selector(videoPlayControlViewDidEndSeeking:seekTime:)]) {
                 [self.delegate videoPlayControlViewDidEndSeeking:self seekTime:self.seekSlider.value];
             }
+            [self hiddenSubViews];
         }
             break;
             
@@ -143,13 +154,20 @@
 {
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hiddenSubViews) object:nil];
     
+    if (!self.isfirstTimePlay) {
+        [self onPlayButtonClicked:self.playButton];
+        return;
+    }
+    
     if (self.playButton.hidden) {
         [self showSubViews];
     } else {
         [self hiddenSubViews];
     }
     
-    [self performSelector:@selector(hiddenSubViews) withObject:nil afterDelay:3];
+    if (self.isPlaying) {
+        [self performSelector:@selector(hiddenSubViews) withObject:nil afterDelay:3];
+    }
 }
 
 #pragma mark - help
@@ -244,6 +262,11 @@
     [self.playButton addTarget:self action:@selector(onPlayButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.playButton setImage:[UIImage imageNamed:@"video_play_button"] forState:UIControlStateNormal];
     [self addSubview:self.playButton];
+    
+    self.progressView = [[UIProgressView alloc] init];
+    self.progressView.progress = 0;
+    self.progressView.progressTintColor = [UIColor orangeColor];
+    [self addSubview:self.progressView];
 }
 
 - (void)setupBottomContentView
@@ -282,6 +305,7 @@
     self.playButton.hidden = YES;
     self.bottomContentView.hidden = YES;
     self.videoTitleLabel.hidden = YES;
+    self.progressView.hidden = NO;
 }
 
 - (void)showSubViews
@@ -289,6 +313,7 @@
     self.playButton.hidden = NO;
     self.bottomContentView.hidden = NO;
     self.videoTitleLabel.hidden = NO;
+    self.progressView.hidden = YES;
 }
 
 #pragma mark - public
@@ -298,7 +323,19 @@
     if (!self.isSeeking) {
         self.currentPlayTime.text = [self formattedStringWithDuration:currentTime];
         [self.seekSlider setValue:currentTime animated:YES];
+        if (!self.progressView.hidden) {
+            self.progressView.progress = currentTime/self.duration;
+        }
     }
+    
+    if (!self.isPlaying) {
+        self.isPlaying = YES;
+    }
+}
+
+- (void)updateVideoPlayState:(BOOL)isPlay
+{
+    [self.playButton setImage:[self playButtonImageWithPlaying:isPlay] forState:UIControlStateNormal];
 }
 
 @end
