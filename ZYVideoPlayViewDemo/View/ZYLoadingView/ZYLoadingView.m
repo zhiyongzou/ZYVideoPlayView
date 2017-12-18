@@ -66,12 +66,12 @@ static const CGFloat kLoadingViewWidth = 80.0;
     [self.dotLayer removeAnimationForKey:@"kDotLayerAnimation"];
 }
 
+#pragma mark - public
+
 + (ZYLoadingView *)loadingView
 {
     return [[self alloc] init];
 }
-
-#pragma mark - public
 
 - (void)showInView:(UIView *)parentView
 {
@@ -82,10 +82,8 @@ static const CGFloat kLoadingViewWidth = 80.0;
 
 - (void)dismiss
 {
-    if ([self superview]) {
-        [self removeFromSuperview];
-        [self zy_removeAnimation];
-    }
+    [self removeFromSuperview];
+    [self zy_removeAnimation];
 }
 
 @end
