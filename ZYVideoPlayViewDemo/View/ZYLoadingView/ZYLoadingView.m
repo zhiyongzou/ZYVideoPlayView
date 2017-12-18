@@ -68,28 +68,23 @@ static const CGFloat kLoadingViewWidth = 80.0;
 
 + (ZYLoadingView *)loadingView
 {
-    static ZYLoadingView *loadingView = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        loadingView = [[ZYLoadingView alloc] init];
-    });
-    return loadingView;
+    return [[self alloc] init];
 }
 
 #pragma mark - public
 
-+ (void)showInView:(UIView *)parentView
+- (void)showInView:(UIView *)parentView
 {
-    [[self loadingView] setCenter:parentView.center];
-    [parentView addSubview:[self loadingView]];
-    [[self loadingView] zy_addAnimation];
+    [self setCenter:parentView.center];
+    [parentView addSubview:self];
+    [self zy_addAnimation];
 }
 
-+ (void)dismiss
+- (void)dismiss
 {
-    if ([[self loadingView] superview]) {
-        [[self loadingView] removeFromSuperview];
-        [[self loadingView] zy_removeAnimation];
+    if ([self superview]) {
+        [self removeFromSuperview];
+        [self zy_removeAnimation];
     }
 }
 

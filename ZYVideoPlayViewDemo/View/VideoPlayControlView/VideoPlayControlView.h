@@ -19,6 +19,7 @@
 
 - (void)updateVideoCurrentPlayTime:(NSTimeInterval)currentTime;
 - (void)updateVideoPlayState:(BOOL)isPlay;
+- (void)setupToDefaultState;
 
 @end
 
@@ -33,6 +34,7 @@
 - (void)videoPlayControlViewDidEndSeeking:(VideoPlayControlView *)aView seekTime:(NSTimeInterval)seekTime;
 
 - (void)videoPlayControlViewDidPlayVideo:(BOOL)isPlay;
+- (void)videoPlayControlViewDidClickFullScreenButton;
 
 @optional
 

@@ -18,6 +18,7 @@
 @property (nonatomic, strong) UISlider *seekSlider;
 @property (nonatomic, strong) UILabel *videoDuretion;
 @property (nonatomic, strong) UIProgressView *progressView;
+@property (nonatomic, strong) UIButton *fullScreenBtn;
 
 @property (nonatomic, assign) CGPoint beginLocation;
 @property (nonatomic, assign) CGFloat moveMargin;
@@ -56,12 +57,16 @@
     self.bottomGradientLayer.frame = CGRectMake(0, CGRectGetHeight(self.bounds) - layer_h, CGRectGetWidth(self.bounds), layer_h);
     
     if (self.bottomContentView) {
+        CGFloat fullScreenBtn_w = 23;
+        CGFloat spacing = 5;
+        self.fullScreenBtn.frame = CGRectMake(self.bottomContentView.width - fullScreenBtn_w, 0, fullScreenBtn_w, self.bottomContentView.height);
         CGSize timeTextSize = [self.currentPlayTime.text sizeWithAttributes:@{NSFontAttributeName : self.currentPlayTime.font}];
-        CGFloat currentPlayTime_w = timeTextSize.width + 5;
+        CGFloat currentPlayTime_w = timeTextSize.width + spacing;
         self.currentPlayTime.frame = CGRectMake(0, 0, currentPlayTime_w, CGRectGetHeight(self.bottomContentView.bounds));
-        self.videoDuretion.frame = CGRectMake(CGRectGetWidth(self.bottomContentView.bounds) - currentPlayTime_w, 0, currentPlayTime_w, CGRectGetHeight(self.bottomContentView.bounds));
-        CGFloat seekSlider_x = CGRectGetMaxX(self.currentPlayTime.frame) + 5;
-        CGFloat seekSlider_w = CGRectGetWidth(self.bottomContentView.bounds) - 2 * currentPlayTime_w - 10;
+        CGFloat videoDuretion_x = CGRectGetWidth(self.bottomContentView.bounds) - currentPlayTime_w - fullScreenBtn_w - spacing;
+        self.videoDuretion.frame = CGRectMake(videoDuretion_x, 0, currentPlayTime_w, CGRectGetHeight(self.bottomContentView.bounds));
+        CGFloat seekSlider_x = CGRectGetMaxX(self.currentPlayTime.frame) + spacing;
+        CGFloat seekSlider_w = self.bottomContentView.width - 2 * currentPlayTime_w - spacing * 3 - fullScreenBtn_w;
         self.seekSlider.frame = CGRectMake(seekSlider_x, 0, seekSlider_w, CGRectGetHeight(self.bottomContentView.bounds));
     }
     
@@ -108,6 +113,13 @@
     }
 }
 
+- (void)onFullScreenButtonClicked:(UIButton *)button
+{
+    if ([self.delegate respondsToSelector:@selector(videoPlayControlViewDidClickFullScreenButton)]) {
+        [self.delegate videoPlayControlViewDidClickFullScreenButton];
+    }
+}
+
 - (void)onseekSliderPan:(UIPanGestureRecognizer *)panGestureRecognizer
 {
     switch (panGestureRecognizer.state) {
@@ -150,7 +162,7 @@
     }
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hiddenSubViews) object:nil];
     
@@ -297,6 +309,12 @@
         self.videoDuretion.textColor = [UIColor whiteColor];
         self.videoDuretion.font = [UIFont systemFontOfSize:12];
         [self.bottomContentView addSubview:self.videoDuretion];
+        
+        self.fullScreenBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.fullScreenBtn setImage:[UIImage imageNamed:@"button_fullscreen"]
+                            forState:UIControlStateNormal];
+        [self.fullScreenBtn addTarget:self action:@selector(onFullScreenButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self.bottomContentView addSubview:self.fullScreenBtn];
     }
 }
 
@@ -306,6 +324,8 @@
     self.bottomContentView.hidden = YES;
     self.videoTitleLabel.hidden = YES;
     self.progressView.hidden = NO;
+    self.bottomGradientLayer.hidden = YES;
+    self.topGradientLayer.hidden = YES;
 }
 
 - (void)showSubViews
@@ -314,6 +334,8 @@
     self.bottomContentView.hidden = NO;
     self.videoTitleLabel.hidden = NO;
     self.progressView.hidden = YES;
+    self.bottomGradientLayer.hidden = NO;
+    self.topGradientLayer.hidden = NO;
 }
 
 #pragma mark - public
@@ -336,6 +358,17 @@
 - (void)updateVideoPlayState:(BOOL)isPlay
 {
     [self.playButton setImage:[self playButtonImageWithPlaying:isPlay] forState:UIControlStateNormal];
+}
+
+- (void)setupToDefaultState
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hiddenSubViews) object:nil];
+    [self showSubViews];
+    [self.playButton setImage:[self playButtonImageWithPlaying:NO] forState:UIControlStateNormal];
+    self.progressView.progress = 0;
+    [self.bottomContentView removeFromSuperview];
+    self.bottomContentView = nil;
+    self.isfirstTimePlay = NO;
 }
 
 @end

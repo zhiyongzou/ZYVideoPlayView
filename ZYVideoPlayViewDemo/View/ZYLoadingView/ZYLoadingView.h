@@ -10,7 +10,9 @@
 
 @interface ZYLoadingView : UIView
 
-+ (void)showInView:(UIView *)parentView;
-+ (void)dismiss;
++ (ZYLoadingView *)loadingView;
+
+- (void)showInView:(UIView *)parentView;
+- (void)dismiss;
 
 @end

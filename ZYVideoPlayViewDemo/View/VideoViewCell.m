@@ -24,6 +24,7 @@
 @property (nonatomic, strong) UILabel *videoDuration;
 @property (nonatomic, strong) UIImageView *videoCoverView;
 @property (nonatomic, strong) VideoPlayControlView * videoPlayControlView;
+@property (nonatomic, strong) ZYLoadingView *loadingView;
 
 @property (nonatomic, strong) UIView *bottomInfoView;
 @property (nonatomic, strong) UIImageView *authorIcon;
@@ -45,6 +46,13 @@
     return self;
 }
 
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    
+    [self setupToDefaultState];
+}
+
 #pragma mark - setter/getter
 
 - (void)setVideoInfo:(VideoModel *)videoInfo
@@ -62,6 +70,14 @@
     }
 }
 
+- (ZYLoadingView *)loadingView
+{
+    if (!_loadingView) {
+        _loadingView = [ZYLoadingView loadingView];
+    }
+    return _loadingView;
+}
+
 #pragma mark - action
 
 - (void)onCommentButtonClicked
@@ -74,7 +90,7 @@
 - (void)videoPlayControlViewDidPlayVideo:(BOOL)isPlay
 {
     if (!self.videoPlayView.videoURL) {
-        [ZYLoadingView showInView:self.videoCoverView];
+        [self.loadingView showInView:self.videoCoverView];
         [self.videoPlayView setVideoURL:[NSURL URLWithString:self.videoInfo.video_url]];
         self.videoPlayNum.hidden = YES;
         self.videoDuration.hidden = YES;
@@ -96,7 +112,7 @@
 
 - (void)videoPlayControlViewDidEndSeeking:(VideoPlayControlView *)aView seekTime:(NSTimeInterval)seekTime
 {
-    [ZYLoadingView showInView:aView];
+    [self.loadingView showInView:aView];
     
     __weak typeof(self) weakSelf = self;
     [self.videoPlayView seekToTime:seekTime completion:^{
@@ -108,7 +124,7 @@
 
 - (void)handleSeekEnd
 {
-    [ZYLoadingView dismiss];
+    [self.loadingView dismiss];
     self.isSeeking = NO;
     [self.videoPlayView play];
     [self.videoPlayControlView updateVideoPlayState:YES];
@@ -118,7 +134,7 @@
 
 - (void)zy_videoPlayViewReadyToPlay:(ZYVideoPlayView *)videoPlayView
 {
-    [ZYLoadingView dismiss];
+    [self.loadingView dismiss];
     [self.videoPlayControlView setDuration:videoPlayView.duration];
     self.videoCoverView.hidden = YES;
     [videoPlayView play];
@@ -240,6 +256,17 @@
     }];
 }
 
+- (void)setupToDefaultState
+{
+    [self.videoPlayView releaseVideoPlayer];
+    [self.loadingView dismiss];
+    self.loadingView = nil;
+    self.videoCoverView.hidden = NO;
+    self.videoPlayNum.hidden = NO;
+    self.videoDuration.hidden = NO;
+    [self.videoPlayControlView setupToDefaultState];
+}
+
 #pragma mark - public
 
 - (void)setupVideoInfo:(VideoModel *)videoInfo indexPath:(NSIndexPath *)indexPath
@@ -251,6 +278,7 @@
 - (void)stopPlay
 {
     [self.videoPlayView pause];
+    [self setupToDefaultState];
 }
 
 @end
