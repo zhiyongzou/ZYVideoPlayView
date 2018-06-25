@@ -229,7 +229,7 @@ static NSString * const ZYPlayerItemPlaybackLikelyToKeepUpKey  = @"playbackLikel
 
 #pragma mark - Seek
 
-- (void)stopPlayingAndSeekSmoothlyToTime:(CMTime)newChaseTime completion:(void (^)())completion
+- (void)stopPlayingAndSeekSmoothlyToTime:(CMTime)newChaseTime completion:(void (^)(void))completion
 {
     [self.player pause];
     
@@ -242,7 +242,7 @@ static NSString * const ZYPlayerItemPlaybackLikelyToKeepUpKey  = @"playbackLikel
     }
 }
 
-- (void)trySeekToChaseTimeCompletion:(void (^)())completion
+- (void)trySeekToChaseTimeCompletion:(void (^)(void))completion
 {
     if (self.player.status == AVPlayerItemStatusUnknown) {
         // wait until item becomes ready
@@ -254,7 +254,7 @@ static NSString * const ZYPlayerItemPlaybackLikelyToKeepUpKey  = @"playbackLikel
     }
 }
 
-- (void)actuallySeekToTimeCompletion:(void (^)())completion
+- (void)actuallySeekToTimeCompletion:(void (^)(void))completion
 {
     self.isSeekInProgress = YES;
     CMTime seekTimeInProgress = self.chaseTime;
@@ -510,7 +510,7 @@ static NSString * const ZYPlayerItemPlaybackLikelyToKeepUpKey  = @"playbackLikel
     [self play];
 }
 
-- (void)seekToTime:(NSTimeInterval)time completion:(void (^)())completion
+- (void)seekToTime:(NSTimeInterval)time completion:(void (^)(void))completion
 {
     [self stopPlayingAndSeekSmoothlyToTime:CMTimeMakeWithSeconds(time, 1) completion:completion];
 }
