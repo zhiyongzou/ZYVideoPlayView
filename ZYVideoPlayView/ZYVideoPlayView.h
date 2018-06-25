@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, ZYPlayerActionAtItemEnd)
-{
+typedef NS_ENUM(NSInteger, ZYPlayerActionAtItemEnd) {
     ZYPlayerActionAtItemEndPause	= 1,
     ZYPlayerActionAtItemEndNone		= 2,
 };
@@ -20,7 +19,6 @@ typedef NS_ENUM(NSInteger, ZYPlayerActionAtItemEnd)
 @interface ZYVideoPlayView : UIView
 
 @property (nonatomic, strong) NSURL *videoURL;
-@property (nonatomic, strong) AVPlayer *player;
 @property (nonatomic, assign) ZYPlayerActionAtItemEnd actionAtItemEnd;
 @property (nonatomic, weak) id<ZYVideoPlayViewDelegate> delegate;
 

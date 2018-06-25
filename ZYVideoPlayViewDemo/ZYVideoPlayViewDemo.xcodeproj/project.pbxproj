@@ -280,7 +280,6 @@
 				DFEE390B1EE174CC00B9FCDC /* Sources */,
 				DFEE390C1EE174CC00B9FCDC /* Frameworks */,
 				DFEE390D1EE174CC00B9FCDC /* Resources */,
-				28858AF345D6CF5E776CC428 /* [CP] Embed Pods Frameworks */,
 				E380F748127972DCAEB780B5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -403,21 +402,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		28858AF345D6CF5E776CC428 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZYVideoPlayViewDemo/Pods-ZYVideoPlayViewDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		E380F748127972DCAEB780B5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -429,7 +413,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

@@ -9,14 +9,16 @@
 #import "ZYVideoPlayView.h"
 #import <AVFoundation/AVFoundation.h>
 
+static NSString * const ZYPlayerRateKey       = @"rate";
 static NSString * const ZYPlayerItemStatusKey = @"status";
-static NSString * const ZYPlayerItemLoadedTimeRangesKey = @"loadedTimeRanges";
-static NSString * const ZYPlayerItemPlaybackBufferEmptyKey = @"playbackBufferEmpty";
-static NSString * const ZYPlayerItemPlaybackLikelyToKeepUpKey = @"playbackLikelyToKeepUp";
-static NSString * const ZYPlayerRateKey = @"rate";
+static NSString * const ZYPlayerItemLoadedTimeRangesKey        = @"loadedTimeRanges";
+static NSString * const ZYPlayerItemPlaybackBufferEmptyKey     = @"playbackBufferEmpty";
+static NSString * const ZYPlayerItemPlaybackLikelyToKeepUpKey  = @"playbackLikelyToKeepUp";
+
 
 @interface ZYVideoPlayView ()
 
+@property (nonatomic, strong) AVPlayer *player;
 @property (nonatomic, strong) AVPlayerLayer *playerLayer;
 @property (nonatomic, strong) AVPlayerItem *playerItem;
 @property (nonatomic, strong) id timeObserver;
@@ -324,10 +326,12 @@ static NSString * const ZYPlayerRateKey = @"rate";
         _player = [AVPlayer playerWithPlayerItem:self.playerItem];
         _player.actionAtItemEnd = (AVPlayerActionAtItemEnd)self.actionAtItemEnd;
         [self.playerLayer setPlayer:self.player];
-        [self.player seekToTime:kCMTimeZero
-                toleranceBefore:kCMTimeZero
-                 toleranceAfter:kCMTimeZero
-              completionHandler:^(BOOL finished) {}];
+        if (AVPlayerStatusReadyToPlay == self.player.status) {
+            [self.player seekToTime:kCMTimeZero
+                    toleranceBefore:kCMTimeZero
+                     toleranceAfter:kCMTimeZero
+                  completionHandler:^(BOOL finished) {}];
+        }
         [self addObserversToPlayer];
     }
     
@@ -349,9 +353,21 @@ static NSString * const ZYPlayerRateKey = @"rate";
 - (void)addNotifications
 {
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(onPlayerItemDidReachEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-    [center addObserver:self selector:@selector(onAppDidEnterBackground:) name:UIApplicationWillResignActiveNotification object:nil];
-    [center addObserver:self selector:@selector(onAppDidEnterForeground:) name:UIApplicationDidBecomeActiveNotification object:nil];
+    
+    [center addObserver:self
+               selector:@selector(onPlayerItemDidReachEnd:)
+                   name:AVPlayerItemDidPlayToEndTimeNotification
+                 object:nil];
+    
+    [center addObserver:self
+               selector:@selector(onAppDidEnterBackground:)
+                   name:UIApplicationWillResignActiveNotification
+                 object:nil];
+    
+    [center addObserver:self
+               selector:@selector(onAppDidEnterForeground:)
+                   name:UIApplicationDidBecomeActiveNotification
+                 object:nil];
 }
 
 - (void)onPlayerItemDidReachEnd:(NSNotification *)notification
@@ -391,7 +407,7 @@ static NSString * const ZYPlayerRateKey = @"rate";
                        context:(void *)context
 {
     if ([keyPath isEqualToString:ZYPlayerItemStatusKey]) {
-        [self handleVideoStatus];
+        [self handlePlayerStatus];
     } else if ([keyPath isEqualToString:ZYPlayerItemLoadedTimeRangesKey]) {
         [self handleVideoLoadedTimeRangesChange];
     } else if ([keyPath isEqualToString:ZYPlayerItemPlaybackBufferEmptyKey]) {
@@ -422,7 +438,7 @@ static NSString * const ZYPlayerRateKey = @"rate";
     }
 }
 
-- (void)handleVideoStatus
+- (void)handlePlayerStatus
 {
     switch (self.player.status) {
         case AVPlayerStatusUnknown: {
