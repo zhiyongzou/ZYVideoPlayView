@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "ZYVideoPlayView"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "ZYVideoPlayView is a new implementation based on AVPlayer. Support MP4 and m3u8"
 
   # This description is used to generate tags and improve search results.
