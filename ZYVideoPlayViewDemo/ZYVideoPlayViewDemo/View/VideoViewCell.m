@@ -10,9 +10,9 @@
 #import "VideoModel.h"
 #import "VideoViewCell.h"
 #import "ZYLoadingView.h"
-#import "ZYVideoPlayView.h"
 #import "VideoPlayControlView.h"
 #import <UIImageView+YYWebImage.h>
+#import <ZYVideoPlayView.h>
 
 @interface VideoViewCell () <ZYVideoPlayViewDelegate, VideoPlayControlViewDelegate>
 
