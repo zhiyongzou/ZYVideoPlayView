@@ -33,10 +33,16 @@ videoPlayView.videoURL = [NSURL URLWithString:@"http://www.xxx.com/xxx/xxx.mp4"]
 ```
 
 ### Usage
-
+#### 1. Manual 
 1. `Add ZYVideoPlayView.h and ZYVideoPlayView.m to your project.`
 2. `#import "ZYVideoPlayView.h" where you want to add`
 
+#### 2. CocoaPods
+Add this to your podfile and run pod install to install:
+
+```
+pod 'ZYVideoPlayView'
+```
 
 ### Demo Preview
 ![](https://github.com/zhiyongzou/ZYVideoPlayView/blob/master/video_list.jpg)
