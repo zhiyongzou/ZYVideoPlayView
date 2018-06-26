@@ -20,10 +20,10 @@ static NSString * const ZYPlayerItemPlaybackLikelyToKeepUpKey  = @"playbackLikel
 
 @property (nonatomic, strong) AVPlayer *player;
 @property (nonatomic, strong) AVPlayerLayer *playerLayer;
-@property (nonatomic, strong) AVPlayerItem *playerItem;
+@property (nonatomic, strong) AVPlayerItem  *playerItem;
 @property (nonatomic, strong) id timeObserver;
 @property (nonatomic, assign) CMTime chaseTime;
-@property (nonatomic, assign) BOOL isSeekInProgress;
+@property (nonatomic, assign) BOOL isSeeking;
 @property (nonatomic, assign) BOOL resumeAfterEnterForground;
 @property (nonatomic, assign) BOOL enterBackground;
 
@@ -118,7 +118,7 @@ static NSString * const ZYPlayerItemPlaybackLikelyToKeepUpKey  = @"playbackLikel
 - (NSTimeInterval)currentTime
 {
     AVPlayerItem *playerItem = [self.player currentItem];
-    if (playerItem.status == AVPlayerItemStatusReadyToPlay) {
+    if (AVPlayerItemStatusReadyToPlay == playerItem.status) {
         return CMTimeGetSeconds(self.playerItem.currentTime);
     }
     
@@ -143,7 +143,7 @@ static NSString * const ZYPlayerItemPlaybackLikelyToKeepUpKey  = @"playbackLikel
 - (NSTimeInterval)duration
 {
     AVPlayerItem *playerItem = [self.player currentItem];
-    if (playerItem.status == AVPlayerItemStatusReadyToPlay) {
+    if (AVPlayerItemStatusReadyToPlay == playerItem.status) {
         return CMTIME_IS_VALID([[self.player currentItem] duration]) ? CMTimeGetSeconds([[self.player currentItem] duration]) : 0;
     }
     
@@ -211,7 +211,9 @@ static NSString * const ZYPlayerItemPlaybackLikelyToKeepUpKey  = @"playbackLikel
         [self removePlayerTimeObserver];
         
         __weak typeof(self) weakSelf = self;
-        self.timeObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 1/self.currentTimeUpdateDuration) queue:NULL usingBlock:^(CMTime time) {
+        self.timeObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 1/self.currentTimeUpdateDuration)
+                                                                      queue:NULL
+                                                                 usingBlock:^(CMTime time) {
             if ([weakSelf.delegate respondsToSelector:@selector(zy_videoPlayView:didUpdateCurrentTime:)]) {
                 [weakSelf.delegate zy_videoPlayView:weakSelf didUpdateCurrentTime:CMTimeGetSeconds(time)];
             }
@@ -229,50 +231,64 @@ static NSString * const ZYPlayerItemPlaybackLikelyToKeepUpKey  = @"playbackLikel
 
 #pragma mark - Seek
 
-- (void)stopPlayingAndSeekSmoothlyToTime:(CMTime)newChaseTime completion:(void (^)(void))completion
+- (void)stopPlayingAndSeekSmoothlyToTime:(CMTime)newChaseTime completion:(void (^)(BOOL success))completion
 {
-    [self.player pause];
+    [self pause];
     
     if (CMTIME_COMPARE_INLINE(newChaseTime, !=, self.chaseTime)) {
         self.chaseTime = newChaseTime;
         
-        if (!self.isSeekInProgress) {
+        if (!self.isSeeking) {
             [self trySeekToChaseTimeCompletion:completion];
         }
+    } else {
+        [self play];
     }
 }
 
-- (void)trySeekToChaseTimeCompletion:(void (^)(void))completion
+- (void)trySeekToChaseTimeCompletion:(void (^)(BOOL success))completion
 {
-    if (self.player.status == AVPlayerItemStatusUnknown) {
-        // wait until item becomes ready
+    if (AVPlayerStatusUnknown == self.player.status) {
         if (completion) {
-            completion();
+            completion(NO);
         }
-    } else if (self.player.status == AVPlayerItemStatusReadyToPlay) {
+#ifdef DEBUG
+        NSLog(@"[ZYVideoPlayView] AVPlayer seek to chase time failed because it's status is unknown");
+#endif
+    } else if (AVPlayerStatusReadyToPlay == self.player.status) {
         [self actuallySeekToTimeCompletion:completion];
     }
 }
 
-- (void)actuallySeekToTimeCompletion:(void (^)(void))completion
+- (void)actuallySeekToTimeCompletion:(void (^)(BOOL success))completion
 {
-    self.isSeekInProgress = YES;
-    CMTime seekTimeInProgress = self.chaseTime;
-    [self.player seekToTime:seekTimeInProgress
+    self.isSeeking = YES;
+    CMTime chaseTime = self.chaseTime;
+    
+    __weak typeof(self) weakSelf = self;
+    [self.player seekToTime:chaseTime
             toleranceBefore:kCMTimeZero
              toleranceAfter:kCMTimeZero
-          completionHandler: ^(BOOL isFinished) {
-              
-         if (CMTIME_COMPARE_INLINE(seekTimeInProgress, ==, self.chaseTime)) {
-             self.isSeekInProgress = NO;
-             self.chaseTime = kCMTimeInvalid;
-             if (completion) {
-                 completion();
-             }
-         } else {
-             [self trySeekToChaseTimeCompletion:completion];
-         }
-     }];
+          completionHandler:^(BOOL isFinished) {
+        [weakSelf handleSeekToTimeWithChaseTime:chaseTime completion:completion];
+    }];
+}
+
+- (void)handleSeekToTimeWithChaseTime:(CMTime)chaseTime completion:(void (^)(BOOL success))completion
+{
+    if (CMTIME_COMPARE_INLINE(chaseTime, ==, self.chaseTime)) {
+        self.isSeeking = NO;
+        self.chaseTime = kCMTimeInvalid;
+        [self play];
+        if (completion) {
+            completion(YES);
+        }
+#ifdef DEBUG
+        NSLog(@"[ZYVideoPlayView] Seek to chase time success: %f", CMTimeGetSeconds(chaseTime));
+#endif
+    } else {
+        [self trySeekToChaseTimeCompletion:completion];
+    }
 }
 
 #pragma mark - Private
@@ -291,11 +307,13 @@ static NSString * const ZYPlayerItemPlaybackLikelyToKeepUpKey  = @"playbackLikel
     for (NSString *thisKey in requestedKeys) {
         NSError *error = nil;
         AVKeyValueStatus keyStatus = [asset statusOfValueForKey:thisKey error:&error];
-        if (keyStatus == AVKeyValueStatusFailed) {
+        if (AVKeyValueStatusFailed == keyStatus) {
             [self assetFailedToPrepareForPlayback:error];
             return;
-        } else if (keyStatus == AVKeyValueStatusCancelled) {
-            //-[AVAsset cancelLoading]
+        } else if (AVKeyValueStatusCancelled == keyStatus) {
+#ifdef DEBUG
+            NSLog(@"[ZYVideoPlayView] Load AVURLAsset was cancelled");
+#endif
         }
     }
     
@@ -376,6 +394,9 @@ static NSString * const ZYPlayerItemPlaybackLikelyToKeepUpKey  = @"playbackLikel
         if ([self.delegate respondsToSelector:@selector(zy_videoPlayViewDidFinishPlay:)]) {
             [self.delegate zy_videoPlayViewDidFinishPlay:self];
         }
+#ifdef DEBUG
+        NSLog(@"[ZYVideoPlayView] Video did finish play");
+#endif
     }
 }
 
@@ -443,6 +464,9 @@ static NSString * const ZYPlayerItemPlaybackLikelyToKeepUpKey  = @"playbackLikel
     switch (self.player.status) {
         case AVPlayerStatusUnknown: {
             [self removePlayerTimeObserver];
+#ifdef DEBUG
+            NSLog(@"[ZYVideoPlayView] AVPlayer play status is unknown");
+#endif
         }
             break;
         case AVPlayerStatusReadyToPlay: {
@@ -453,12 +477,18 @@ static NSString * const ZYPlayerItemPlaybackLikelyToKeepUpKey  = @"playbackLikel
             }
             
             [self addPlayerTimeObserver];
+#ifdef DEBUG
+            NSLog(@"[ZYVideoPlayView] AVPlayer ready to play");
+#endif
         }
             break;
         case AVPlayerStatusFailed: {
             if ([self.delegate respondsToSelector:@selector(zy_videoPlayViewFailedToPlay:)]) {
                 [self.delegate zy_videoPlayViewFailedToPlay:self];
             }
+#ifdef DEBUG
+            NSLog(@"[ZYVideoPlayView] AVPlayer failed to play");
+#endif
         }
             break;
             
@@ -469,14 +499,16 @@ static NSString * const ZYPlayerItemPlaybackLikelyToKeepUpKey  = @"playbackLikel
 
 - (void)handleBufferEmpty
 {
-    if ([self.playerItem isPlaybackBufferEmpty] && [self.delegate respondsToSelector:@selector(zy_videoPlayViewPlaybackBufferEmpty:)]) {
+    if ([self.playerItem isPlaybackBufferEmpty] &&
+        [self.delegate respondsToSelector:@selector(zy_videoPlayViewPlaybackBufferEmpty:)]) {
         [self.delegate zy_videoPlayViewPlaybackBufferEmpty:self];
     }
 }
 
 - (void)handlePlaybackLikelyToKeepUp
 {
-    if ([self.playerItem isPlaybackLikelyToKeepUp] && [self.delegate respondsToSelector:@selector(zy_videoPlayViewPlaybackLikelyToKeepUp:)]) {
+    if ([self.playerItem isPlaybackLikelyToKeepUp] &&
+        [self.delegate respondsToSelector:@selector(zy_videoPlayViewPlaybackLikelyToKeepUp:)]) {
         [self.delegate zy_videoPlayViewPlaybackLikelyToKeepUp:self];
     }
 }
@@ -510,7 +542,7 @@ static NSString * const ZYPlayerItemPlaybackLikelyToKeepUpKey  = @"playbackLikel
     [self play];
 }
 
-- (void)seekToTime:(NSTimeInterval)time completion:(void (^)(void))completion
+- (void)seekToTime:(NSTimeInterval)time completion:(void (^)(BOOL success))completion
 {
     [self stopPlayingAndSeekSmoothlyToTime:CMTimeMakeWithSeconds(time, 1) completion:completion];
 }

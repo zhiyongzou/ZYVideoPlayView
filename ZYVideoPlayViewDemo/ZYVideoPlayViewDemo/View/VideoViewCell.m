@@ -115,7 +115,7 @@
     [self.loadingView showInView:aView];
     
     __weak typeof(self) weakSelf = self;
-    [self.videoPlayView seekToTime:seekTime completion:^{
+    [self.videoPlayView seekToTime:seekTime completion:^(BOOL success) {
         [weakSelf handleSeekEnd];
     }];
 }
@@ -126,7 +126,6 @@
 {
     [self.loadingView dismiss];
     self.isSeeking = NO;
-    [self.videoPlayView play];
     [self.videoPlayControlView updateVideoPlayState:YES];
 }
 

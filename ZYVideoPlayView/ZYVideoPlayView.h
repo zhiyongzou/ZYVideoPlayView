@@ -37,8 +37,7 @@ typedef NS_ENUM(NSInteger, ZYPlayerActionAtItemEnd) {
 
 - (void)releaseVideoPlayer;
 
-//video will pause when seek
-- (void)seekToTime:(NSTimeInterval)time completion:(void (^)(void))completion;
+- (void)seekToTime:(NSTimeInterval)time completion:(void (^)(BOOL success))completion;
 
 + (instancetype)videoPlayViewWithUrlString:(NSString *)urlStr;
 
